@@ -6,19 +6,30 @@ function combine () {
   }).join('|')+')')
 }
 
-var string     = /"(?:(?:\/n\\"|[^"]))*?"/
-var string_    = /'(?:(?:\\'|[^']))*?'/
-var comment    = /\/\*[\s\S]*?\*\//
-var comment2   = /\/\/.*?\n/
-var whitespace = /\s+/
-var keyword    = /\b(?:var|let|for|in|class|function|return|with|case|break|switch|export|new)\b/
-var name       = /[a-zA-Z_\$][a-zA-Z_\$0-9]*/
-var number     = /-?\d+(?:\.\d+)?(?:e[+-]?\d+)?/
-var punct      = /[;.:\?\^%()\{\}?\[\]<>=!&|+\-,]/
-var regexp     = /\/(?:(?:\\\/|[^\/]))*?\//
+var pattern = {
+  string1    : /"(?:(?:\/n\\"|[^"]))*?"/
+, string2    : /'(?:(?:\\'|[^']))*?'/
+, comment    : /\/\*[\s\S]*?\*\//
+, comment2   : /\/\/.*?\n/
+, whitespace : /\s+/
+, keyword    : /\b(?:var|let|for|in|class|function|return|with|case|break|switch|export|new)\b/
+, name       : /[a-zA-Z_\$][a-zA-Z_\$0-9]*/
+, number     : /-?\d+(?:\.\d+)?(?:e[+-]?\d+)?/
+, regexp     : /\/(?:(?:\\\/|[^\/]))*?\//
+, punct      : /[;.:\?\^%()\{\}?\[\]<>=!&|+\-,]/
+}
 
-var match = combine(string, string_, comment, comment2, 
-            whitespace, name, number, regexp, punct)
+var match = combine(
+  pattern.string1,
+  pattern.string2,
+  pattern.comment,
+  pattern.comment2, 
+  pattern.whitespace,
+  pattern.name,
+  pattern.number,
+  pattern.regexp,
+  pattern.punct
+)
 
 module.exports = function (str) {
   return str.split(match).filter(function (e, i) {
@@ -31,6 +42,12 @@ module.exports = function (str) {
   })
 }
 
+module.exports.type = function (e) {
+  for (var type in pattern)
+    if(pattern[type].test(e))
+      return type
+  return null
+}
 if(!module.parent) {
   var fs = require('fs')
   console.log(module.exports(fs.readFileSync(process.argv[2], 'utf-8')))
