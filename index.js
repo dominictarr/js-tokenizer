@@ -31,12 +31,12 @@ var match = combine(
   pattern.punct
 )
 
-module.exports = function (str) {
+module.exports = function (str, doNotThrow) {
   return str.split(match).filter(function (e, i) {
     if(i % 2)
       return true
 
-    if(e !== '')
+    if(e !== '' && !doNotThrow)
       throw new Error('invalid token:'+JSON.stringify(e))
 
   })
@@ -46,5 +46,5 @@ module.exports.type = function (e) {
   for (var type in pattern)
     if(pattern[type].test(e))
       return type
-  return null
+  return 'invalid'
 }
