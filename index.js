@@ -48,7 +48,3 @@ module.exports.type = function (e) {
       return type
   return null
 }
-if(!module.parent) {
-  var fs = require('fs')
-  console.log(module.exports(fs.readFileSync(process.argv[2], 'utf-8')))
-}
