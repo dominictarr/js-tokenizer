@@ -9,7 +9,7 @@ function combine () {
 var pattern = {
   string1    : /"(?:(?:\/n\\"|[^"]))*?"/
 , string2    : /'(?:(?:\\'|[^']))*?'/
-, comment    : /\/\*[\s\S]*?\*\//
+, comment1    : /\/\*[\s\S]*?\*\//
 , comment2   : /\/\/.*?\n/
 , whitespace : /\s+/
 , keyword    : /\b(?:var|let|for|in|class|function|return|with|case|break|switch|export|new)\b/
@@ -20,15 +20,15 @@ var pattern = {
 }
 
 var match = combine(
-  pattern.string1,
-  pattern.string2,
-  pattern.comment,
-  pattern.comment2, 
-  pattern.whitespace,
-  pattern.name,
-  pattern.number,
-  pattern.regexp,
-  pattern.punct
+  pattern.string1
+, pattern.string2
+, pattern.comment1
+, pattern.comment2
+, pattern.whitespace
+, pattern.name
+, pattern.number
+, pattern.regexp
+, pattern.punct
 )
 
 module.exports = function (str, doNotThrow) {
@@ -36,9 +36,11 @@ module.exports = function (str, doNotThrow) {
     if(i % 2)
       return true
 
-    if(e !== '' && !doNotThrow)
-      throw new Error('invalid token:'+JSON.stringify(e))
-
+    if(e !== '') {
+      if(!doNotThrow)
+        throw new Error('invalid token:'+JSON.stringify(e))
+      return true
+    }
   })
 }
 
