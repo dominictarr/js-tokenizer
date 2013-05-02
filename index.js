@@ -7,15 +7,16 @@ function combine () {
 }
 
 var pattern = {
-  string1    : /"(?:(?:\/n\\"|[^"]))*?"/
-, string2    : /'(?:(?:\\'|[^']))*?'/
-, comment1    : /\/\*[\s\S]*?\*\//
+  string1    : /"(?:(?:\\\n|\\"|[^"\n]))*?"/
+, string2    : /'(?:(?:\\\n|\\'|[^'\n]))*?'/
+//, string2    : /'(?:(?:\\'|[^']))*?'/
+, comment1   : /\/\*[\s\S]*?\*\//
 , comment2   : /\/\/.*?\n/
 , whitespace : /\s+/
 , keyword    : /\b(?:var|let|for|in|class|function|return|with|case|break|switch|export|new)\b/
+, regexp     : /\/(?:(?:\\\/|[^\/]))*?\//
 , name       : /[a-zA-Z_\$][a-zA-Z_\$0-9]*/
 , number     : /-?\d+(?:\.\d+)?(?:e[+-]?\d+)?/
-, regexp     : /\/(?:(?:\\\/|[^\/]))*?\//
 , punct      : /[;.:\?\^%()\{\}?\[\]<>=!&|+\-,]/
 }
 
@@ -24,10 +25,10 @@ var match = combine(
 , pattern.string2
 , pattern.comment1
 , pattern.comment2
+, pattern.regexp
 , pattern.whitespace
 , pattern.name
 , pattern.number
-, pattern.regexp
 , pattern.punct
 )
 
