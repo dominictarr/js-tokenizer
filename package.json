@@ -7,13 +7,13 @@
     "type": "git",
     "url": "git://github.com/dominictarr/js-tokenizer.git"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "tap": "~0.4.2"
   },
   "scripts": {
     "test": "set -e; for t in test/*.js; do node $t; done"
   },
   "author": "Dominic Tarr <dominic.tarr@gmail.com> (http://dominictarr.com)",
-  "license": "MIT"  
+  "license": "MIT"
 }
