@@ -22,10 +22,10 @@ var pattern = {
 , comment1   : /\/\*[\s\S]*?\*\//
 , comment2   : /\/\/.*?\n/
 , whitespace : /\s+/
-, keyword    : /\b(?:var|let|for|in|class|function|return|with|case|break|switch|export|new)\b/
+, keyword    : /\b(?:var|let|for|if|else|in|class|function|return|with|case|break|switch|export|new)\b/
 , regexp     : /\/(?:(?:\\\/|[^\/]))*?\//
 , name       : /[a-zA-Z_\$][a-zA-Z_\$0-9]*/
-, number     : /-?\d+(?:\.\d+)?(?:e[+-]?\d+)?/
+, number     : /\d+(?:\.\d+)?(?:e[+-]?\d+)?/
 , parens     : /[\(\)]/
 , curly      : /[{}]/
 , square     : /[\[\]]/
