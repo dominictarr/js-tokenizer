@@ -22,7 +22,7 @@ var pattern = {
 , comment2   : /\/\/.*?\n/
 , whitespace : /\s+/
 , keyword    : /\b(?:var|let|for|if|else|in|class|function|return|with|case|break|switch|export|new|while|do|throw|catch)\b/
-, regexp     : /\/(?:(?:\\\/|[^\/]))*?\//
+, regexp     : /\/(?:(?:\\\/|[^\n\/]))*?\//
 , name       : /[a-zA-Z_\$][a-zA-Z_\$0-9]*/
 , number     : /\d+(?:\.\d+)?(?:e[+-]?\d+)?/
 , parens     : /[\(\)]/
