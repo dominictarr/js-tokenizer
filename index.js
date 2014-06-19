@@ -28,7 +28,7 @@ var pattern = {
 , parens     : /[\(\)]/
 , curly      : /[{}]/
 , square     : /[\[\]]/
-, punct      : /[;.:\?\^%<>=!&|+\-,]/
+, punct      : /[;.:\?\^%<>=!&|+\-,~]/
 }
 
 var match = combine(
